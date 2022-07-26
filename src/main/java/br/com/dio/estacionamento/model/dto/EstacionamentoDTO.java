@@ -1,8 +1,11 @@
-package br.com.dio.estacionamento.model;
+package br.com.dio.estacionamento.model.dto;
 
 import java.time.LocalDateTime;
 
-public class Estacionamento {
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class EstacionamentoDTO {
 
 	private String id;
 	private String placa;
@@ -13,18 +16,29 @@ public class Estacionamento {
 	private LocalDateTime dataEntrada;
 	private LocalDateTime dataSaida;
 	private Double valor;
-
-	public Estacionamento(String id, String placa, String estado, String marca, String modelo, String cor) {
-		this.id = id;
-		this.placa = placa;
-		this.estado = estado;
-		this.marca = marca;
-		this.modelo = modelo;
-		this.cor = cor;
+	
+	public LocalDateTime getDataEntrada() {
+		return dataEntrada;
 	}
 
-	public Estacionamento() {
-		// TODO Auto-generated constructor stub
+	public void setDataEntrada(LocalDateTime dataEntrada) {
+		this.dataEntrada = dataEntrada;
+	}
+
+	public LocalDateTime getDataSaida() {
+		return dataSaida;
+	}
+
+	public void setDataSaida(LocalDateTime dataSaida) {
+		this.dataSaida = dataSaida;
+	}
+
+	public Double getValor() {
+		return valor;
+	}
+
+	public void setValor(Double valor) {
+		this.valor = valor;
 	}
 
 	public String getId() {
@@ -75,27 +89,4 @@ public class Estacionamento {
 		this.cor = cor;
 	}
 
-	public LocalDateTime getDataEntrada() {
-		return dataEntrada;
-	}
-
-	public void setDataEntrada(LocalDateTime dataEntrada) {
-		this.dataEntrada = dataEntrada;
-	}
-
-	public LocalDateTime getDataSaida() {
-		return dataSaida;
-	}
-
-	public void setDataSaida(LocalDateTime dataSaida) {
-		this.dataSaida = dataSaida;
-	}
-
-	public Double getValor() {
-		return valor;
-	}
-
-	public void setValor(Double valor) {
-		this.valor = valor;
-	}
 }
