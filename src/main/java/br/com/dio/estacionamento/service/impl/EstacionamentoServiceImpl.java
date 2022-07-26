@@ -17,12 +17,21 @@ public class EstacionamentoServiceImpl { // implements EstacionamentoService{
 
 	static {
 		var id = getUUID();
-		Estacionamento est = new Estacionamento(getUUID(), "PMD-1234", "CE", "HYUNDAI", "CRETA", "PRETO");
+		var id1 = getUUID();
+		Estacionamento est = new Estacionamento(id, "PMD-1234", "CE", "HYUNDAI", "CRETA", "PRETO");
+		Estacionamento est2 = new Estacionamento(id1, "HGX-5678", "SP", "TOYOTA", "SW-4", "BRANCO-PEROLA");
 		estacionamentoMap.put(id, est);
+		estacionamentoMap.put(id1, est2);
 	}
 
 	public List<Estacionamento> findAll() {
 		return estacionamentoMap.values().stream().collect(Collectors.toList());
+	}
+
+	public Estacionamento findById(String id) {
+		// TODO Auto-generated method stub
+		return estacionamentoMap.get(id);
+
 	}
 
 	public static String getUUID() {

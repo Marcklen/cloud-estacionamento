@@ -14,11 +14,11 @@ public class EstacionamentoMapper {
 	
 	private static final ModelMapper MODEL_MAPPER = new ModelMapper();
 	
-	public EstacionamentoDTO dto (Estacionamento est) {
+	public EstacionamentoDTO toEstacionamentoDTO(Estacionamento est) {
 		return MODEL_MAPPER.map(est, EstacionamentoDTO.class);
 	}
 
 	public List<EstacionamentoDTO> toEstacionamentoDTOList(List<Estacionamento> estacionamentoLista) {
-		return estacionamentoLista.stream().map(this::dto).collect(Collectors.toList());
+		return estacionamentoLista.stream().map(this::toEstacionamentoDTO).collect(Collectors.toList());
 	}
 }
