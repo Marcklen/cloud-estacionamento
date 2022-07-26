@@ -1,5 +1,6 @@
 package br.com.dio.estacionamento.service.impl;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,5 +38,14 @@ public class EstacionamentoServiceImpl { // implements EstacionamentoService{
 	public static String getUUID() {
 		// TODO Auto-generated method stub
 		return UUID.randomUUID().toString().replace("-", "");
+	}
+
+	public Estacionamento create(Estacionamento novoEstacionamento) {
+		// TODO Auto-generated method stub
+		String uuid = getUUID();
+		novoEstacionamento.setId(uuid);
+		novoEstacionamento.setDataEntrada(LocalDateTime.now());
+		estacionamentoMap.put(uuid, novoEstacionamento);
+		return novoEstacionamento;
 	}
 }

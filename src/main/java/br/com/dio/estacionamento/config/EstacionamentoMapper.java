@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import br.com.dio.estacionamento.model.Estacionamento;
 import br.com.dio.estacionamento.model.dto.EstacionamentoDTO;
+import br.com.dio.estacionamento.model.dto.EstacionamentoFormDTO;
 
 @Component
 public class EstacionamentoMapper {
@@ -20,5 +21,15 @@ public class EstacionamentoMapper {
 
 	public List<EstacionamentoDTO> toEstacionamentoDTOList(List<Estacionamento> estacionamentoLista) {
 		return estacionamentoLista.stream().map(this::toEstacionamentoDTO).collect(Collectors.toList());
+	}
+
+	public Estacionamento toEstacionamento(EstacionamentoDTO dto) {
+		// TODO Auto-generated method stub
+		return MODEL_MAPPER.map(dto, Estacionamento.class);
+	}
+
+	public Estacionamento toEstacionamentoForm(EstacionamentoFormDTO dto) {
+		// TODO Auto-generated method stub
+		return MODEL_MAPPER.map(dto, Estacionamento.class);
 	}
 }
