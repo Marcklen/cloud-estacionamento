@@ -16,9 +16,12 @@ import br.com.dio.estacionamento.model.Estacionamento;
 import br.com.dio.estacionamento.model.dto.EstacionamentoDTO;
 import br.com.dio.estacionamento.model.dto.EstacionamentoFormDTO;
 import br.com.dio.estacionamento.service.impl.EstacionamentoServiceImpl;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/estacionamento")
+@Api(tags = "Estacionamento Controller")
 public class EstacionamentoController {
 
 	private final EstacionamentoServiceImpl service;
@@ -30,6 +33,7 @@ public class EstacionamentoController {
 	}
 
 	@GetMapping
+	@ApiOperation("Buscar Todos Carros Estacionados")
 	public ResponseEntity<List<EstacionamentoDTO>> findAll() {
 		List<Estacionamento> estacionamentoLista = service.findAll();
 		List<EstacionamentoDTO> result = mapper.toEstacionamentoDTOList(estacionamentoLista);
