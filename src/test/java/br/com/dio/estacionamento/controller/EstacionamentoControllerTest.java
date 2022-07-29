@@ -26,7 +26,8 @@ class EstacionamentoControllerTest extends AbstractContainerBase{
 	@Test
 	void whenFindAllTheCheckResult() {
 		RestAssured.given()
-			.auth().basic("user", "13579")
+			.auth()
+			.basic("user", "mmg@13579")
 			.when()
 			.get("/estacionamento")
 			.then()
@@ -61,7 +62,8 @@ class EstacionamentoControllerTest extends AbstractContainerBase{
 		
 		RestAssured.given()
 					.when()
-					.auth().basic("user", "13579")
+					.auth()
+					.basic("user", "mmg@13579")
 					.contentType(MediaType.APPLICATION_JSON_VALUE)
 					.body(dtoForm)
 					.post("/estacionamento")
