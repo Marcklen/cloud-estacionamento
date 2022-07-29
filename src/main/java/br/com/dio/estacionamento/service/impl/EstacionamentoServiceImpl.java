@@ -10,9 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.dio.estacionamento.exception.EstacionamentoNotFoundException;
 import br.com.dio.estacionamento.model.Estacionamento;
 import br.com.dio.estacionamento.repository.EstacionamentoRepository;
+import br.com.dio.estacionamento.service.EstacionamentoService;
 
 @Service
-public class EstacionamentoServiceImpl { // implements EstacionamentoService{
+public class EstacionamentoServiceImpl implements EstacionamentoService{
 
 	private final EstacionamentoRepository repository;
 
@@ -20,12 +21,15 @@ public class EstacionamentoServiceImpl { // implements EstacionamentoService{
 		this.repository = repository;
 	}
 
-    @Transactional(readOnly = true)
+	@Transactional(readOnly = true)
+	@Override
 	public List<Estacionamento> findAll() {
+		// TODO Auto-generated method stub
 		return repository.findAll();
 	}
 
     @Transactional(readOnly = true)
+    @Override
 	public Estacionamento findById(String id) {
 		// TODO Auto-generated method stub
 		return repository.findById(id).orElseThrow(
@@ -38,6 +42,7 @@ public class EstacionamentoServiceImpl { // implements EstacionamentoService{
 	}
 
 	@Transactional
+	@Override
 	public Estacionamento create(Estacionamento novoEstacionamento) {
 		// TODO Auto-generated method stub
 		String uuid = getUUID();
@@ -48,6 +53,7 @@ public class EstacionamentoServiceImpl { // implements EstacionamentoService{
 	}
 
 	@Transactional
+	@Override
 	public void delete(String id) {
 		// TODO Auto-generated method stub
 		findById(id);
@@ -55,6 +61,7 @@ public class EstacionamentoServiceImpl { // implements EstacionamentoService{
 	}
 
 	@Transactional
+	@Override
 	public Estacionamento update(String id, Estacionamento atualizarEstacionamento) {
 		// TODO Auto-generated method stub
 		Estacionamento estacionamento = findById(id);
@@ -64,6 +71,7 @@ public class EstacionamentoServiceImpl { // implements EstacionamentoService{
 	}
 	
 	@Transactional
+	@Override
 	public Estacionamento exit (String id) {
 		//recuperando o carro estacionado
 		Estacionamento estacionamento = findById(id);
