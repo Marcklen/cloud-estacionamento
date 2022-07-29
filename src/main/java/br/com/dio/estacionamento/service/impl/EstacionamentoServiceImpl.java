@@ -11,33 +11,25 @@ import org.springframework.stereotype.Service;
 
 import br.com.dio.estacionamento.exception.EstacionamentoNotFoundException;
 import br.com.dio.estacionamento.model.Estacionamento;
+import br.com.dio.estacionamento.repository.EstacionamentoRepository;
 
 @Service
 public class EstacionamentoServiceImpl { // implements EstacionamentoService{
 
-	private static Map<String, Estacionamento> estacionamentoMap = new HashMap();
+	private final EstacionamentoRepository repository;
 
-	static {
-		var id = getUUID();
-		var id1 = getUUID();
-		Estacionamento est = new Estacionamento(id, "PMD-1234", "CE", "HYUNDAI", "CRETA", "PRETO");
-		Estacionamento est2 = new Estacionamento(id1, "HGX-5678", "SP", "TOYOTA", "SW-4", "BRANCO-PEROLA");
-		estacionamentoMap.put(id, est);
-		estacionamentoMap.put(id1, est2);
+	public EstacionamentoServiceImpl(EstacionamentoRepository repository) {
+		this.repository = repository;
 	}
 
 	public List<Estacionamento> findAll() {
-		return estacionamentoMap.values().stream().collect(Collectors.toList());
+		return repository.findAll();
 	}
 
 	public Estacionamento findById(String id) {
 		// TODO Auto-generated method stub
-		Estacionamento estacionamento = estacionamentoMap.get(id);
-		if (estacionamento == null) {
-			throw new EstacionamentoNotFoundException(id);
-		}
-		return estacionamentoMap.get(id);
-
+		return repository.findById(id).orElseThrow(
+				() -> new EstacionamentoNotFoundException(id));
 	}
 
 	public static String getUUID() {
@@ -50,22 +42,21 @@ public class EstacionamentoServiceImpl { // implements EstacionamentoService{
 		String uuid = getUUID();
 		novoEstacionamento.setId(uuid);
 		novoEstacionamento.setDataEntrada(LocalDateTime.now());
-		estacionamentoMap.put(uuid, novoEstacionamento);
+		repository.save(novoEstacionamento);
 		return novoEstacionamento;
 	}
 
 	public void delete(String id) {
 		// TODO Auto-generated method stub
-		//Estacionamento estacionamento = 
 		findById(id);
-		estacionamentoMap.remove(id);
+		repository.deleteById(id);
 	}
 
 	public Estacionamento update(String id, Estacionamento atualizarEstacionamento) {
 		// TODO Auto-generated method stub
 		Estacionamento estacionamento = findById(id);
 		estacionamento.setCor(atualizarEstacionamento.getCor());
-		estacionamentoMap.replace(id, estacionamento);
+		repository.save(estacionamento);
 		return estacionamento;
 	}
 }

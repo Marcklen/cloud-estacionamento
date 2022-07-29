@@ -2,8 +2,13 @@ package br.com.dio.estacionamento.model;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity(name = "ESTACIONAMENTO_TB")
 public class Estacionamento {
 
+	@Id
 	private String id;
 	private String placa;
 	private String estado;
