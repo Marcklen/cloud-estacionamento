@@ -44,6 +44,7 @@ public class EstacionamentoController {
 	}
 
 	@GetMapping("/{id}")
+	@ApiOperation("Buscar Carro Estacionado por um ID")
 	public ResponseEntity<EstacionamentoDTO> findById(@PathVariable String id) {
 		Estacionamento estacionamento = service.findById(id);
 		EstacionamentoDTO result = mapper.toEstacionamentoDTO(estacionamento);
@@ -52,6 +53,7 @@ public class EstacionamentoController {
 	}
 	
 	@PostMapping
+	@ApiOperation("Salvar carro no estacionamento")
 	public ResponseEntity<EstacionamentoDTO> create(@RequestBody EstacionamentoFormDTO dto ) {
 		Estacionamento novoEstacionamento = mapper.toEstacionamentoForm(dto);
 		Estacionamento estacionamento = service.create(novoEstacionamento);
@@ -61,6 +63,7 @@ public class EstacionamentoController {
 	}
 	
 	@DeleteMapping("/{id}")
+	@ApiOperation("Excluir carro estacionado")
 	public ResponseEntity delete(@PathVariable String id) {
 		//Estacionamento estacionamento = 
 		service.delete(id);
@@ -68,10 +71,18 @@ public class EstacionamentoController {
 	}
 	
 	@PutMapping("/{id}")
+	@ApiOperation("Atualizar SE houver erros, um carro estacionado")
 	public ResponseEntity<EstacionamentoDTO> update (@PathVariable String id, @RequestBody EstacionamentoFormDTO dto) {
 		Estacionamento atualizarEstacionamento = mapper.toEstacionamentoForm(dto);
 		Estacionamento estacionamento = service.update(id, atualizarEstacionamento);
 		
+		return ResponseEntity.ok(mapper.toEstacionamentoDTO(estacionamento));
+	}
+	
+	@PostMapping("/{id}")
+	@ApiOperation("Calcular valor a pagar de carro estacionado")
+	public ResponseEntity<EstacionamentoDTO> exit (@PathVariable String id) {
+		Estacionamento estacionamento = service.exit(id);
 		return ResponseEntity.ok(mapper.toEstacionamentoDTO(estacionamento));
 	}
 }
